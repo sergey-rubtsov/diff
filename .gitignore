@@ -1,0 +1,21 @@
+.gradle
+/build/
+gradle.properties
+gradle
+gradlew
+gradlew.bat
+bash_profile
+out
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.DS_Store
+
+### Eclipse ###
+/bin/
+.settings/*
+.classpath
+.project

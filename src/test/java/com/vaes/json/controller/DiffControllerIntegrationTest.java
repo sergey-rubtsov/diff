@@ -1,6 +1,5 @@
 package com.vaes.json.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaes.json.DiffApplication;
 import com.vaes.json.TestUtils;
@@ -43,46 +42,87 @@ public class DiffControllerIntegrationTest {
 
     @Test
     public void testUsualScenario() throws Exception {
-        JsonNode leftJson = TestUtils.getTestNode("left.json");
-        JsonNode rightJson = TestUtils.getTestNode("right.json");
-        JsonNode expected = TestUtils.getTestNode("result.json");
+        String leftJson = TestUtils.getTestNode("left.txt");
+        String rightJson = TestUtils.getTestNode("right.txt");
         URI leftUri = URI.create("/v1/diff/42/left");
         this.mockMvc.perform(MockMvcRequestBuilders.post(leftUri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(leftJson.toString()))
+                .content(leftJson))
                 .andExpect(status().isOk());
         URI rightUri = URI.create("/v1/diff/42/right");
         this.mockMvc.perform(MockMvcRequestBuilders.post(rightUri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(rightJson.toString()))
+                .content(rightJson))
                 .andExpect(status().isOk());
         URI diff = URI.create("/v1/diff/42");
         this.mockMvc.perform(get(diff)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(expected.toString(), true));
+                .andExpect(content().json("{\"size\":1024,\"offset\":1009}", true));
     }
 
     @Test
     public void testOppositeScenario() throws Exception {
-        JsonNode leftJson = TestUtils.getTestNode("left.json");
-        JsonNode rightJson = TestUtils.getTestNode("right.json");
-        JsonNode expected = TestUtils.getTestNode("result.json");
+        String leftJson = TestUtils.getTestNode("left.txt");
+        String rightJson = TestUtils.getTestNode("right.txt");
         URI rightUri = URI.create("/v1/diff/24/right");
         this.mockMvc.perform(MockMvcRequestBuilders.post(rightUri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(rightJson.toString()))
+                .content(rightJson))
                 .andExpect(status().isOk());
         URI leftUri = URI.create("/v1/diff/24/left");
         this.mockMvc.perform(MockMvcRequestBuilders.post(leftUri)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(leftJson.toString()))
+                .content(leftJson))
                 .andExpect(status().isOk());
         URI diff = URI.create("/v1/diff/24");
         this.mockMvc.perform(get(diff)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(expected.toString(), true));
+                .andExpect(content().json("{\"size\":1024,\"offset\":1009}", true));
+    }
+
+    @Test
+    public void testEqualsAndDiffSizeScenario() throws Exception {
+        String leftJson = TestUtils.getTestNode("left.txt");
+        String rightJson = TestUtils.getTestNode("left.txt");
+        URI rightUri = URI.create("/v1/diff/25/right");
+        URI leftUri = URI.create("/v1/diff/25/left");
+        this.mockMvc.perform(MockMvcRequestBuilders.post(leftUri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(leftJson))
+                .andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.post(rightUri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(rightJson))
+                .andExpect(status().isOk());
+        URI diff = URI.create("/v1/diff/25");
+        this.mockMvc.perform(get(diff)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"status\":\"EQUAL_SIZE\"}", true));
+        this.mockMvc.perform(MockMvcRequestBuilders.post(leftUri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("uryrury" + leftJson))
+                .andExpect(status().isOk());
+        this.mockMvc.perform(get(diff)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"status\":\"UNEQUAL_SIZE\"}", true));
+    }
+
+    @Test
+    public void testUnprocessableEntityScenario() throws Exception {
+        String leftJson = TestUtils.getTestNode("left.txt");
+        URI leftUri = URI.create("/v1/diff/43/left");
+        this.mockMvc.perform(MockMvcRequestBuilders.post(leftUri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(leftJson))
+                .andExpect(status().isOk());
+        URI diff = URI.create("/v1/diff/43");
+        this.mockMvc.perform(get(diff)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnprocessableEntity());
     }
 
 }

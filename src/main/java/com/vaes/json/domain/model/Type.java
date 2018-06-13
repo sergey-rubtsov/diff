@@ -5,6 +5,6 @@ package com.vaes.json.domain.model;
  */
 public enum Type {
 
-    LEFT, RIGHT, DIFF
+    LEFT, RIGHT
 
 }

@@ -1,8 +1,7 @@
 package com.vaes.json.domain.repository;
 
 import com.vaes.json.TestUtils;
-import com.vaes.json.domain.model.JsonObject;
-import com.vaes.json.domain.model.Type;
+import com.vaes.json.domain.model.Base64Data;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +27,13 @@ public class JsonRepositoryTest {
 
     @Test
     public void saveAndFindJsonObjectByUid() throws IOException {
-        JsonObject json = new JsonObject(TestUtils.getTestNode("left.json"), Type.LEFT, "test");
-        Optional<JsonObject> found = jsonRepository.findJsonObjectByUid("test");
+        Base64Data json = new Base64Data(TestUtils.getTestNode("left.txt"), TestUtils.getTestNode("right.txt"), "test");
+        Optional<Base64Data> found = jsonRepository.findJsonObjectByUid("test");
         assertFalse(found.isPresent());
         jsonRepository.save(json);
         found = jsonRepository.findJsonObjectByUid("test");
         assertTrue(found.isPresent());
-        JsonObject result = found.get();
+        Base64Data result = found.get();
         assertEquals(json, result);
     }
 

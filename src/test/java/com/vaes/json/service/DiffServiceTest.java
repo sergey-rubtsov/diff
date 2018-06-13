@@ -1,11 +1,11 @@
 package com.vaes.json.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.vaes.json.TestUtils;
-import com.vaes.json.domain.model.JsonObject;
+import com.vaes.json.domain.model.Base64Data;
 import com.vaes.json.domain.model.Type;
 import com.vaes.json.domain.repository.JsonRepository;
 import com.vaes.json.exception.ResourceNotFoundException;
+import com.vaes.json.message.StatusMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -35,19 +36,22 @@ public class DiffServiceTest {
 
     @Test
     public void getDiff() throws IOException {
-        JsonNode expected = TestUtils.getTestNode("result.json");
-        Optional<JsonObject> stored = Optional.of(new JsonObject(expected, Type.LEFT, "id"));
+        String left = TestUtils.getTestNode("left.txt");
+        String right = TestUtils.getTestNode("right.txt");
+        Optional<Base64Data> stored = Optional.of(new Base64Data(left, right, "id"));
         when(jsonRepository.findJsonObjectByUid(anyString())).thenReturn(stored);
 
-        JsonNode result = diffService.getDiff("id");
+        StatusMessage result = diffService.getDiff("id");
 
         verify(jsonRepository).findJsonObjectByUid(eq("id"));
-        assertEquals(expected, result);
+
+        assertEquals(1024, (int) result.getSize());
+        assertEquals(1009, (int) result.getOffset());
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void getDiffNotFound() {
-        Optional<JsonObject> stored = Optional.empty();
+        Optional<Base64Data> stored = Optional.empty();
         when(jsonRepository.findJsonObjectByUid(anyString())).thenReturn(stored);
 
         diffService.getDiff("id");
@@ -55,20 +59,22 @@ public class DiffServiceTest {
 
     @Test
     public void processJson() throws IOException {
-        JsonNode left = TestUtils.getTestNode("left.json");
-        Optional<JsonObject> stored = Optional.of(new JsonObject(left, Type.LEFT, "id"));
+        String left = TestUtils.getTestNode("left.txt");
+        String right = TestUtils.getTestNode("right.txt");
+        Optional<Base64Data> stored = Optional.of(new Base64Data(left, right, "id"));
         when(jsonRepository.findJsonObjectByUid(anyString())).thenReturn(stored);
-        doNothing().when(jsonRepository).save(any(JsonObject.class));
-        ArgumentCaptor<JsonObject> captor = ArgumentCaptor.forClass(JsonObject.class);
-        JsonNode right = TestUtils.getTestNode("right.json");
+        doNothing().when(jsonRepository).save(any(Base64Data.class));
+        ArgumentCaptor<Base64Data> captor = ArgumentCaptor.forClass(Base64Data.class);
 
-        diffService.processJson(right, Type.RIGHT, "id");
+        diffService.storeData(right, Type.RIGHT, "id");
 
         verify(jsonRepository).findJsonObjectByUid(eq("id"));
         verify(jsonRepository).save(captor.capture());
-        JsonObject result = captor.getValue();
-        JsonNode expected = TestUtils.getTestNode("result.json");
-        assertEquals(expected.toString(), result.getJson().toString());
+        Base64Data result = captor.getValue();
+        assertTrue(result.getLeft().isPresent());
+        assertTrue(result.getRight().isPresent());
+        assertEquals(left, result.getLeft().get());
+        assertEquals(right, result.getRight().get());
     }
 
 }

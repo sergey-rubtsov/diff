@@ -1,18 +1,25 @@
 package com.vaes.json;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 public class TestUtils {
 
-    public static JsonNode getTestNode(String fileName) throws IOException {
+    public static String getTestNode(String fileName) throws IOException {
         ClassLoader classLoader = TestUtils.class.getClassLoader();
-        return new ObjectMapper().readValue(classLoader.getResourceAsStream(fileName),
-                new TypeReference<JsonNode>() {
-                });
+        final int bufferSize = 1024;
+        final char[] buffer = new char[bufferSize];
+        final StringBuilder out = new StringBuilder();
+        Reader in = new InputStreamReader(classLoader.getResourceAsStream(fileName), "UTF-8");
+        for (; ; ) {
+            int rsz = in.read(buffer, 0, buffer.length);
+            if (rsz < 0) {
+                break;
+            }
+            out.append(buffer, 0, rsz);
+        }
+        return out.toString();
     }
 
 }

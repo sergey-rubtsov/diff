@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public interface DiffController {
 
     @ResponseBody
-    @RequestMapping(value = "/{id:.+}", method = RequestMethod.GET,
+    @RequestMapping(value = "/{uid:.+}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    JsonNode getDiff(Integer id);
+    JsonNode getDiff(String uid);
 
     @ResponseBody
-    @RequestMapping(value = "/{id:.+}/left", method = RequestMethod.POST,
+    @RequestMapping(value = "/{uid:.+}/left", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    void postLeft(JsonNode left, Integer id);
+    void postLeft(JsonNode left, String uid);
 
     @ResponseBody
-    @RequestMapping(value = "/{id:.+}/right", method = RequestMethod.POST,
+    @RequestMapping(value = "/{uid:.+}/right", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    void postRight(JsonNode right, Integer id);
+    void postRight(JsonNode right, String uid);
 
 }

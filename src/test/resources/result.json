@@ -1,0 +1,84 @@
+[
+  {
+    "op": "replace",
+    "path": "/Aidan Gillen/aboolean",
+    "value": "true"
+  },
+  {
+    "op": "replace",
+    "path": "/Aidan Gillen/array/0",
+    "value": "Game of Thrones"
+  },
+  {
+    "op": "replace",
+    "path": "/Aidan Gillen/boolean",
+    "value": false
+  },
+  {
+    "op": "replace",
+    "path": "/Aidan Gillen/int",
+    "value": "2"
+  },
+  {
+    "op": "remove",
+    "path": "/Aidan Gillen/object/object1"
+  },
+  {
+    "op": "remove",
+    "path": "/Aidan Gillen/object/object2"
+  },
+  {
+    "op": "remove",
+    "path": "/Aidan Gillen/object/object3"
+  },
+  {
+    "op": "remove",
+    "path": "/Aidan Gillen/object/object4"
+  },
+  {
+    "op": "add",
+    "path": "/Aidan Gillen/otherint",
+    "value": 4
+  },
+  {
+    "op": "move",
+    "from": "/Alexander Skarsgard",
+    "path": "/Alexander Skarsg?rd"
+  },
+  {
+    "op": "replace",
+    "path": "/Amy Ryan",
+    "value": [
+      "In Treatment",
+      "The Wire"
+    ]
+  },
+  {
+    "op": "add",
+    "path": "/Annie Fitzgerald/0",
+    "value": "True Blood"
+  },
+  {
+    "op": "replace",
+    "path": "/Annie Fitzgerald/2",
+    "value": "The Sopranos"
+  },
+  {
+    "op": "add",
+    "path": "/Annie Fitzgerald/3",
+    "value": "Oz"
+  },
+  {
+    "op": "remove",
+    "path": "/Clarke Peters"
+  },
+  {
+    "op": "add",
+    "path": "/Alice Farmer",
+    "value": [
+      "The Corner",
+      "Oz",
+      "The Wire"
+    ]
+  }
+]

@@ -27,7 +27,8 @@ public class JsonRepositoryTest {
 
     @Test
     public void saveAndFindJsonObjectByUid() throws IOException {
-        Base64Data json = new Base64Data(TestUtils.getTestNode("left.txt"), TestUtils.getTestNode("right.txt"), "test");
+        Base64Data json = new Base64Data(TestUtils.getTestNode("left.txt"),
+                TestUtils.getTestNode("right.txt"), "test");
         Optional<Base64Data> found = jsonRepository.findJsonObjectByUid("test");
         assertFalse(found.isPresent());
         jsonRepository.save(json);

@@ -56,7 +56,7 @@ public class DiffService {
         char[] rightArray = right.toCharArray();
         int n = leftArray.length;
         int i = 0;
-        while (n-- != 0) {
+        while(n-- != 0) {
             if (leftArray[i] != rightArray[i]) {
                 return i;
             }

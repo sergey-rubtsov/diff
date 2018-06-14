@@ -12,7 +12,7 @@ public class TestUtils {
         final char[] buffer = new char[bufferSize];
         final StringBuilder out = new StringBuilder();
         Reader in = new InputStreamReader(classLoader.getResourceAsStream(fileName), "UTF-8");
-        for (; ; ) {
+        while(true) {
             int rsz = in.read(buffer, 0, buffer.length);
             if (rsz < 0) {
                 break;

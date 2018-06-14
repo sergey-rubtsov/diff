@@ -37,7 +37,7 @@ public class DiffService {
      */
     private StatusMessage processData(Base64Data data) {
         StatusMessage message = new StatusMessage();
-        data.getLeft().map(left -> data.getRight().map(right -> {
+        return data.getLeft().map(left -> data.getRight().map(right -> {
             if (left.equals(right)) {
                 return message.status(Status.EQUAL_SIZE);
             } else if (left.length() != right.length()) {
@@ -49,7 +49,6 @@ public class DiffService {
             }
         }).orElseThrow(() -> new UnprocessableEntityException("right data is not set")))
                 .orElseThrow(() -> new UnprocessableEntityException("left data is not set"));
-        return message;
     }
 
     private Integer calculateOffset(String left, String right) {

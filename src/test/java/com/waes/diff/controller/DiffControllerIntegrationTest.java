@@ -1,8 +1,8 @@
-package com.vaes.json.controller;
+package com.waes.diff.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaes.json.DiffApplication;
-import com.vaes.json.TestUtils;
+import com.waes.diff.DiffApplication;
+import com.waes.diff.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

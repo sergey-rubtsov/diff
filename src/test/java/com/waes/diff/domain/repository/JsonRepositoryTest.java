@@ -1,7 +1,7 @@
-package com.vaes.json.domain.repository;
+package com.waes.diff.domain.repository;
 
-import com.vaes.json.TestUtils;
-import com.vaes.json.domain.model.Base64Data;
+import com.waes.diff.TestUtils;
+import com.waes.diff.domain.model.Base64Data;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

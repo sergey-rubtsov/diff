@@ -1,4 +1,4 @@
-package com.vaes.json.exception;
+package com.waes.diff.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

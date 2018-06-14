@@ -1,7 +1,7 @@
-package com.vaes.json.message;
+package com.waes.diff.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.vaes.json.domain.model.Status;
+import com.waes.diff.domain.model.Status;
 import lombok.Data;
 
 @Data

@@ -1,6 +1,6 @@
-package com.vaes.json.controller;
+package com.waes.diff.controller;
 
-import com.vaes.json.message.StatusMessage;
+import com.waes.diff.message.StatusMessage;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

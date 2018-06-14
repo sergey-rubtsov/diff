@@ -1,8 +1,8 @@
-package com.vaes.json.controller;
+package com.waes.diff.controller;
 
-import com.vaes.json.domain.model.Type;
-import com.vaes.json.message.StatusMessage;
-import com.vaes.json.service.DiffService;
+import com.waes.diff.domain.model.Type;
+import com.waes.diff.message.StatusMessage;
+import com.waes.diff.service.DiffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-group 'com.vaes.json'
+group 'com.waes.diff'
 version '0.1.0'
 
 buildscript {

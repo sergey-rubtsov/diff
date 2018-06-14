@@ -1,12 +1,12 @@
-package com.vaes.json.service;
+package com.waes.diff.service;
 
-import com.vaes.json.domain.model.Base64Data;
-import com.vaes.json.domain.model.Status;
-import com.vaes.json.domain.model.Type;
-import com.vaes.json.domain.repository.JsonRepository;
-import com.vaes.json.exception.ResourceNotFoundException;
-import com.vaes.json.exception.UnprocessableEntityException;
-import com.vaes.json.message.StatusMessage;
+import com.waes.diff.domain.model.Base64Data;
+import com.waes.diff.domain.model.Status;
+import com.waes.diff.domain.model.Type;
+import com.waes.diff.domain.repository.JsonRepository;
+import com.waes.diff.exception.ResourceNotFoundException;
+import com.waes.diff.exception.UnprocessableEntityException;
+import com.waes.diff.message.StatusMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.vaes.json.controller;
+package com.waes.diff.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.vaes.json.domain.model;
+package com.waes.diff.domain.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

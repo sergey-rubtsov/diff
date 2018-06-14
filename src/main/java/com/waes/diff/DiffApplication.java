@@ -1,4 +1,4 @@
-package com.vaes.json;
+package com.waes.diff;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

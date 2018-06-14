@@ -1,6 +1,6 @@
-package com.vaes.json.domain.repository;
+package com.waes.diff.domain.repository;
 
-import com.vaes.json.domain.model.Base64Data;
+import com.waes.diff.domain.model.Base64Data;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;

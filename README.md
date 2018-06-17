@@ -33,5 +33,50 @@ Test coverage is about 96%
 This is a Spring Boot application. 
 You can run it with class DiffApplication.
 
+## How to check
 
+Run application.
+
+Make POST request 
+
+**http://localhost:8083/v1/diff/42/left** with body 0123A56789A
+it should return status code 200
+
+And POST request 
+
+**http://localhost:8083/v1/diff/42/right** with body 0123456789A
+it should return status code 200 too
+
+The GET request 
+
+**http://localhost:8083/v1/diff/42** will return:
+
+``
+{
+    "size": 11,
+    "offset": 4
+}
+``
+
+If you make POST requests with different body size, the response will be next:
+
+``
+{
+    "status": "UNEQUAL_SIZE"
+}
+``
+
+If you make POST requests with equals body, the response will be next:
+
+``
+{
+    "status": "EQUAL_SIZE"
+}
+``
+
+The empty body in POST request will return error 406 "Not Acceptable"
+
+If you try to GET and did not make any POST, you will receive error 404 "Not Found"
+
+If you try to GET and did only one POST, you will receive error 422 "Unprocessable Entity"
 

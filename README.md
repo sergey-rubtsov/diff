@@ -4,7 +4,7 @@ This service provides 2 http endpoints that accepts JSON base64 encoded binary d
 
 **{host}/v1/diff/{ID}/left** 
 
-and 
+and:
 
 **{host}/v1/diff/{ID}/right**
 
@@ -16,7 +16,7 @@ The results provided the following info in JSON format:
 - If equal return that
 - If not of equal size just return that
 - If of same size provide insight in where the diffs are, actual diffs are not needed. 
-So mainly offsets + length in the data
+So mainly offsets + length in the data.
 
 ## Compilation
 
@@ -25,8 +25,8 @@ _Project contains Lombok annotations!_
 To compile it in your IDE you need to install Lombok plugin and enable annotation processing.
 
 Clone this project and import it as gradle project.
-After all dependencies are downloaded tests could be run.
-Test coverage is about 96%
+After all dependencies are downloaded, tests could be run.
+Test coverage is about 96%.
 
 ## Run
 
@@ -37,17 +37,17 @@ You can run it with class DiffApplication.
 
 Run application.
 
-Make POST request 
+Make POST request: 
 
 **http://localhost:8083/v1/diff/42/left** with body 0123A56789A
 it should return status code 200
 
-And POST request 
+And POST request:
 
 **http://localhost:8083/v1/diff/42/right** with body 0123456789A
 it should return status code 200 too
 
-The GET request 
+The GET request: 
 
 **http://localhost:8083/v1/diff/42** will return:
 
@@ -74,9 +74,9 @@ If you make POST requests with equals body, the response will be next:
 }
 ``
 
-The empty body in POST request will return error 406 "Not Acceptable"
+The empty body in POST request will return error 406 "Not Acceptable".
 
-If you try to GET and did not make any POST, you will receive error 404 "Not Found"
+If you try to GET and did not make any POST, you will receive error 404 "Not Found".
 
-If you try to GET and did only one POST, you will receive error 422 "Unprocessable Entity"
+If you try to GET and did only one POST, you will receive error 422 "Unprocessable Entity".
 
